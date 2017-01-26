@@ -1,0 +1,21 @@
+<div class="col-xs-6 col-sm-3" ng-repeat="player in list | filter:searchText">
+    <div class="thumbnail players-panel">
+        <a ng-href="#/players/{{player.$id}}">
+            <img ng-if="player.pictureUrl" err-src="../images/default_picture.gif"
+                 ng-src="{{ player.pictureUrl }}"
+                 alt="{{ player.lastName }} picture"
+                 class="text-center"
+                    >
+            <img ng-if="!player.pictureUrl"
+                 ng-src="../images/default_picture.gif"
+                 alt="{{ player.lastName }} picture"
+                 class="text-center">
+        </a>
+        <div class="caption text-center">
+            <h4 class="text">
+                {{ player.firstName }} {{ player.lastName }}
+            </h4>
+            <p>{{ player.emailAddress }}</p>
+        </div>
+    </div>
+</div>

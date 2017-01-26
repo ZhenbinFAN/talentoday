@@ -1,0 +1,48 @@
+
+<div ng-if="_ready">
+
+  <div class="container">
+    <div class="row">
+      <div class="form-inline col-md-6">
+        <input type="text" class="form-control" placeholder="Search"
+               ng-model="searchText"
+               uib-tooltip="search all the players"
+               tooltip-placement="right">
+      </div>
+      <div class="col-md-6 text-right">
+        <add-player></add-player>
+      </div>
+    </div>
+
+    <div class="row">
+        <players-table list="filteredList" ng-if="!searchText"></players-table>
+        <players-table list="players" search-text="searchText" ng-if="searchText"></players-table>
+    </div>
+
+      <div class="row">
+          <div class="pagination-sm col-md-6">
+              <ul uib-pagination
+                  total-items="totalItems"
+                  ng-model="currentPage"
+                  max-size="maxSize"
+                  items-per-page="itemsPerPage"
+                  ng-change="pageChanged(currentPage)"
+                  boundary-link-numbers="true"></ul>
+          </div>
+
+          <div class="col-md-6">
+              <label>players per page:</label>
+              <input type="text" ng-model="itemsPerPage" class="form-control"
+                     ng-change="setItemsPerPage(itemsPerPage)"
+                     uib-tooltip="enter a number like 4, 8, 12..."/>
+          </div>
+      </div>
+  </div>
+
+
+
+</div>
+
+
+<span ng-if="!_ready" us-spinner></span>
+

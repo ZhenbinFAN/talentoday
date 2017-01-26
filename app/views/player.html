@@ -1,0 +1,66 @@
+
+<div ng-if="_ready" class="container">
+    <div class="row thumbnail player-panel">
+        <div class="col-sm-6 col-xs-8 col-xs-offset-2">
+            <img ng-if="player.pictureUrl"
+                 ng-src="{{ player.pictureUrl }}"
+                 err-src="../images/default_picture.gif"
+                 alt="{{ player.displayName }} picture"
+                 class="img-responsive">
+            <img ng-if="!player.pictureUrl"
+                 class="img-fullwidth"
+                 ng-src="../images/default_picture.gif"
+                 alt="{{ player.displayName }} picture"
+                 class="img-responsive">
+        </div>
+        <div class="col-sm-6 col-xs-8 col-xs-offset-2">
+            <h4>{{ player.firstName }} {{ player.lastName }}</h4>
+            <p>
+                <small>
+                    <a>{{ player.emailAddress }}</a>
+                </small>
+            </p>
+        </div>
+        <div class="col-xs-8 col-xs-offset-2">
+            <p>{{player.description | lengthLimit}}</p>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading" contenteditable="false">{{player.firstName}} {{player.lastName}}</div>
+        <div class="panel-body">
+
+            <form name="edition" ng-submit="edit()" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Rate:</label>
+                        <div class="col-sm-10">
+                            <rate rate="player.rate"></rate>
+                        </div>
+                    </div>
+
+                    <label>first name:</label>
+                    <input type="text" class="form-control" ng-model="player.firstName"/>
+                    <label>last name:</label>
+                    <input type="text" class="form-control" ng-model="player.lastName"/>
+                    <label>email:</label>
+                    <input type="email" class="form-control" ng-model="player.emailAddress"/>
+                    <label>Phone number:</label>
+                    <input type="number" class="form-control" ng-model="player.phoneNumber"/>
+                    <label>Birthday:</label>
+                    <date-picker my-date="player.birthday"></date-picker>
+
+                    <label>description:</label>
+                    <textarea class="form-control" ng-model="player.description"/>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-10 col-sm-2">
+                            <input type="submit" class="btn btn-default" value="Update"/>
+                        </div>
+                    </div>
+                </form>
+
+        </div>
+    </div>
+</div>
+
+<span ng-if="!_ready" us-spinner></span>
