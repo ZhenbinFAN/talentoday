@@ -11,10 +11,8 @@
     angular.module('appApp')
         .directive('addPlayer', function () {
             return {
-                controller: function ($scope, toaster, FirebaseFactory) {
-
-                    $scope.players = FirebaseFactory.playersArray();
-
+                controller: function ($scope, toaster) {
+                    
                     function init() {
                         $scope.newPlayer = {
                             FirstName: '',
@@ -29,20 +27,22 @@
                     init();
 
                     $scope.addPlayer = function () {
-
-                        $scope.players.$add({
+                        var player = {
                             firstName: $scope.newPlayer.FirstName,
                             lastName: $scope.newPlayer.LastName,
                             emailAddress: $scope.newPlayer.Email,
                             phoneNumber: $scope.newPlayer.PhoneNumber,
                             description: $scope.newPlayer.Description,
-                            birthday: $scope.newPlayer.Birthday,
+                            birthday: $scope.newPlayer.Birthday.toString(),
                             rate: $scope.newPlayer.Rate
 
-                        })
+                        };
+
+                        $scope.players.$add(player)
                             .then(
                             function (playerRef) {
                                 init();
+                                $scope.newPlayerAdded();
                                 toaster.pop('success', "", "The player has been added.");
                             },
                             function (err) {
