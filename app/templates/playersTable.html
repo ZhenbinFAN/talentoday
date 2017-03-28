@@ -1,6 +1,6 @@
 <div class="col-xs-6 col-sm-3" ng-repeat="player in list | filter:searchText">
     <div class="thumbnail players-panel">
-        <a ng-href="#/players/{{player.$id}}">
+        <a href="players/{{player.$id}}">
             <img ng-if="player.pictureUrl" err-src="../images/default_picture.gif"
                  ng-src="{{ player.pictureUrl }}"
                  alt="{{ player.lastName }} picture"
